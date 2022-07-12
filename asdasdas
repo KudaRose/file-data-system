@@ -1,0 +1,70 @@
+void Admin::modificarProductos()
+{
+    cout << "Modificando productos" << endl;
+    ifstream Lec;
+    string tipo, marca, modelo, material, tienda;
+    float precio;
+    int codigo, cant_disponibles;
+    string cod_aux, tipo_aux, marca_aux, modelo_aux, material_aux, tienda_aux, precio_aux, cant_disponibles_aux;
+    bool result = false;
+    Lec.open("productos.txt", ios::in);
+    ofstream aux("auxiliar.txt", ios::out);
+    if (Lec.is_open())
+    {
+        codigo = stoi(entrada("Codigo del producto a modificar: "));
+        cin.ignore();
+        do
+        {
+            getline(Lec, cod_aux, ',');
+            cout << "" << cod_aux << "" << endl;
+            getline(Lec, tipo_aux, ',');
+            getline(Lec, marca_aux, ',');
+            getline(Lec, modelo_aux, ',');
+            getline(Lec, material_aux, ',');
+            getline(Lec, tienda_aux, ',');
+            getline(Lec, precio_aux, ',');
+            getline(Lec, cant_disponibles_aux, '\n');
+            if (to_string(codigo) == cod_aux)
+            {
+                cout << "------------ Nueva informacion ------------" << endl;
+                cout << "Tipo: ";
+                getline(cin, tipo);
+                cout << "Marca: ";
+                getline(cin, marca);
+                cout << "Modelo: ";
+                getline(cin, modelo);
+                cout << "Material: ";
+                getline(cin, material);
+                cout << "Tienda: ";
+                getline(cin, tienda);
+                precio = stoi(entrada("Precio: "));
+                cant_disponibles = stoi(entrada("Cantidad de disponibles: "));
+                aux << to_string(codigo) << "," << tipo << "," << marca << "," << modelo << "," << material << "," << tienda << "," << to_string(precio) << "," << to_string(cant_disponibles) << endl;
+                result = true;
+            }
+            else
+            {
+                if (cod_aux == "")
+                {
+                    break;
+                }
+                else
+                {
+                    aux << cod_aux << "," << tipo_aux << "," << marca_aux << "," << modelo_aux << "," << material_aux << "," << tienda_aux << "," << precio_aux << "," << cant_disponibles_aux << endl;
+                }
+            }
+        } while (!Lec.eof());
+        if (result == false)
+        {
+            cout << "No existe el producto solicitado" << endl;
+        }
+        Lec.close();
+        aux.close();
+    }
+    else
+    {
+        cout << "No hay productos ingresados" << endl;
+    }
+    remove("productos.txt");
+    rename("auxiliar.txt", "productos.txt");
+}

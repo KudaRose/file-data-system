@@ -1,0 +1,5 @@
+1,Admin1,power01,0
+2,carlitos,crack,1
+3,jojoo,hache,1
+4,alex,elcapo,1
+5,pepe,argento,1

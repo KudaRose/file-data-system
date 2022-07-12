@@ -1,0 +1,5 @@
+1,ricardo,partese
+2,eodos,72
+3,kike,matamitos
+4,juan manual,nunez
+5,joaco,guardia
